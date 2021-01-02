@@ -1,6 +1,5 @@
 
-============================ᴍᴀsᴛᴇʀɪɴɢ ʙᴏᴛ ɴɪᴍᴀ ᴍᴀx============ <br>
-
+===ʕ•̫͡•ʔ❤️ ᑎᏆᗰᗩ ᗰᗩ᙭ ᗷᝪᎢ ❤️ʕ•̫͡•ʔ
 # INSTALL MELALUI TERMUX<br>
 pkg install python<br>
 apt-get update<br>
