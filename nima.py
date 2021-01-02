@@ -99,8 +99,8 @@ settings = {
     "welcome": False,
     "javascrift": False,
     "leave": False,
-    "expire" : True,
-    "nCall" : True,
+    "expire" : False,
+    "nCall" : False,
     "time": time.time(),
     "flood": 0,
     "temp_flood" : False,
@@ -225,7 +225,7 @@ wait = {
     "talkban":True,
     "contact":False,
     'autoJoin':False,
-    'autoAdd':True,
+    'autoAdd':False,
     'autoCancel':{"on":True, "members":1},
     'autoLeave':False,
     'autoLeave1':False,
@@ -1315,175 +1315,7 @@ def bot(op):
                         image = "http://dl.profile.line-cdn.net/" + contact.pictureStatus
                         nimamax.sendImageWithURL(op.param1, image)
                         
-        if op.type == 65:
-            if settings["unsendMessage"] == True:
-                try:
-                    at = op.param1
-                    msg_id = op.param2
-                    if msg_id in msg_dict:
-                        if msg_dict[msg_id]["from"]:
-                           if msg_dict[msg_id]["text"] == 'Gambarnya dibawah':
-                                ginfo = nimamax.getGroup(at)
-                                ryan = nimamax.getContact(msg_dict[msg_id]["from"])
-                                zx = ""
-                                zxc = ""
-                                zx2 = []
-                                xpesan =  "📧Gambar Dihapus 📧\n Pengirim : "
-                                ret_ = " Nama Grup : {}".format(str(ginfo.name))
-                                ret_ += "\n Waktu Ngirim : {}".format(dt_to_str(cTime_to_datetime(msg_dict[msg_id]["createdTime"])))
-                                ry = str(ryan.displayName)
-                                pesan = ''
-                                pesan2 = pesan+"@x \n"
-                                xlen = str(len(zxc)+len(xpesan))
-                                xlen2 = str(len(zxc)+len(pesan2)+len(xpesan)-1)
-                                zx = {'S':xlen, 'E':xlen2, 'M':ryan.mid}
-                                zx2.append(zx)
-                                zxc += pesan2
-                                text = xpesan + zxc + ret_ + ""
-                                nimamax.sendMessage(at, text, contentMetadata={'MENTION':str('{"MENTIONEES":'+json.dumps(zx2).replace(' ','')+'}')}, contentType=0)
-                                nimamax.sendImage(at, msg_dict[msg_id]["data"])
-                           else:
-                                ginfo = nimamax.getGroup(at)
-                                ryan = nimamax.getContact(msg_dict[msg_id]["from"])
-                                ret_ =  "📧 Pesan Dihapus 📧\n"
-                                ret_ += " Pengirim : {}".format(str(ryan.displayName))
-                                ret_ += "\n Nama Grup : {}".format(str(ginfo.name))
-                                ret_ += "\n Waktu Ngirim : {}".format(dt_to_str(cTime_to_datetime(msg_dict[msg_id]["createdTime"])))
-                                ret_ += "\n Pesannya : {}".format(str(msg_dict[msg_id]["text"]))
-                                nimamax.sendMessage(at, str(ret_))
-                        del msg_dict[msg_id]
-                except Exception as e:
-                    print(e)
-
-        if op.type == 65:
-            if settings["unsendMessage"] == True:
-                try:
-                    at = op.param1
-                    msg_id = op.param2
-                    if msg_id in msg_dict1:
-                        if msg_dict1[msg_id]["from"]:
-                                ginfo = nimamax.getGroup(at)
-                                ryan = nimamax.getContact(msg_dict1[msg_id]["from"])
-                                ret_ =  "📧 Sticker Dihapus 📧\n"
-                                ret_ += " Pengirim : {}".format(str(ryan.displayName))
-                                ret_ += "\n Nama Grup : {}".format(str(ginfo.name))
-                                ret_ += "\n Waktu Ngirim : {}".format(dt_to_str(cTime_to_datetime(msg_dict1[msg_id]["createdTime"])))
-                                ret_ += "{}".format(str(msg_dict1[msg_id]["text"]))
-                                nimamax.sendMessage(at, str(ret_))
-                                nimamax.sendImage(at, msg_dict1[msg_id]["data"])
-                        del msg_dict1[msg_id]
-                except Exception as e:
-                    print(e) 
-                        
-        if op.type == 26:
-            msg = op.message
-            text = msg.text
-            msg_id = msg.id
-            receiver = msg.to
-            sender = msg._from
-            if msg.toType == 0 or msg.toType == 2:
-                if sender != nimamax.profile.mid:
-                    to = sender
-                else:
-                    to = receiver
-                if msg.contentType == 6:
-                  if settings["nCall"] == True:
-                    if msg._from not in Bots:
-                        try:
-                            contact = nimamax.getContact(sender)
-                            group = nimamax.getGroup(msg.to)
-                            cover = nimamax.getProfileCoverURL(sender)
-                            tz = pytz.timezone("Asia/Jakarta")
-                            timeNow = datetime.now(tz=tz)
-                            if msg.toType == 2:
-                                b = msg.contentMetadata['GC_EVT_TYPE']
-                                c = msg.contentMetadata["GC_MEDIA_TYPE"]
-                                if c == 'AUDIO' and b == "S":
-                                    arg = "• ᴄᴀʟʟ ᴀᴜᴅɪᴏ"
-                                    arg += "\n• ᴛʏᴘᴇ {} ᴄᴀʟʟ".format(c) 
-                                    arg += "\n• ɴᴍ: {}".format(str(contact.displayName)) 
-                                    arg += "\n• ɢᴄ: {}".format(str(group.name))
-                                    arg += "\n• ʜʀ: {}".format(timeNow.strftime('%A'))
-                                    arg += "\n• ᴊᴍ: {}".format(datetime.strftime(timeNow,'%H:%M:%S'))
-                                    arg += "\n• ᴛɢ: {}".format(datetime.strftime(timeNow,'%d-%m-%Y'))
-                                    nimamax.sendMessage(msg.to,arg)
-                                if c == 'VIDEO' and b == "S":
-                                    arg = "• ᴄᴀʟʟ ᴠɪᴅᴇᴏ"
-                                    arg += "\n• ᴛʏᴘᴇ {} ᴄᴀʟʟ".format(c) 
-                                    arg += "\n• ɴᴍ: {}".format(str(contact.displayName)) 
-                                    arg += "\n• ɢᴄ: {}".format(str(group.name))
-                                    arg += "\n• ʜʀ: {}".format(timeNow.strftime('%A'))
-                                    arg += "\n• ᴊᴍ: {}".format(datetime.strftime(timeNow,'%H:%M:%S'))
-                                    arg += "\n• ᴛɢ: {}".format(datetime.strftime(timeNow,'%d-%m-%Y'))
-                                    nimamax.sendMessage(msg.to,arg)
-                                if c == 'LIVE' and b == "S":
-                                    arg = "• ᴄᴀʟʟ ʟɪᴠᴇ"
-                                    arg += "\n• ᴛʏᴘᴇ {} ᴄᴀʟʟ".format(c) 
-                                    arg += "\n• ɴᴍ: {}".format(str(contact.displayName)) 
-                                    arg += "\n• ɢᴄ: {}".format(str(group.name))
-                                    arg += "\n• ʜʀ: {}".format(timeNow.strftime('%A'))
-                                    arg += "\n• ᴊᴍ: {}".format(datetime.strftime(timeNow,'%H:%M:%S'))
-                                    arg += "\n• ᴛɢ: {}".format(datetime.strftime(timeNow,'%d-%m-%Y'))
-                                    nimamax.sendMessage(msg.to,arg)
-                                else:
-                                    mills = int(msg.contentMetadata["DURATION"])
-                                    seconds = (mills/1000)%60
-                                    if c == "AUDIO" and b == "E":
-                                        arg = "• ᴄᴀʟʟ ᴀᴜᴅɪᴏ"
-                                        arg += "\n• ᴅɪᴀᴋʜɪʀɪ {} ᴄᴀʟʟ".format(c)
-                                        arg += "\n• ɴᴍ: {}".format(str(contact.displayName)) 
-                                        arg += "\n• ɢᴄ: {}".format(str(group.name))
-                                        arg += "\n• ʜʀ: {}".format(timeNow.strftime('%A'))
-                                        arg += "\n• ᴊᴍ: {}".format(datetime.strftime(timeNow,'%H:%M:%S'))
-                                        arg += "\n• ᴛɢ: {}".format(datetime.strftime(timeNow,'%d-%m-%Y'))
-                                        arg += "\n• ᴅʀ: {}".format(seconds)
-                                        nimamax.sendMessage(msg.to,arg)
-                                    if c == "VIDEO" and b == "E":
-                                        arg = "• ᴄᴀʟʟ ᴠɪᴅᴇᴏ"
-                                        arg += "\n• ᴅɪᴀᴋʜɪʀɪ {} ᴄᴀʟʟ".format(c)
-                                        arg += "\n• ɴᴍ: {}".format(str(contact.displayName)) 
-                                        arg += "\n• ɢᴄ: {}".format(str(group.name))
-                                        arg += "\n• ʜʀ: {}".format(timeNow.strftime('%A'))
-                                        arg += "\n• ᴊᴍ: {}".format(datetime.strftime(timeNow,'%H:%M:%S'))
-                                        arg += "\n• ᴛɢ: {}".format(datetime.strftime(timeNow,'%d-%m-%Y'))
-                                        arg += "\n• ᴅʀ: {}".format(seconds)
-                                        nimamax.sendMessage(msg.to,arg)
-                                    if c == "LIVE" and b == "E":
-                                        arg = "• ᴄᴀʟʟ ʟɪᴠᴇ"
-                                        arg += "\n• ᴅɪᴀᴋʜɪʀɪ {} ᴄᴀʟʟ".format(c)
-                                        arg += "\n• ɴᴍ: {}".format(str(contact.displayName)) 
-                                        arg += "\n• ɢᴄ: {}".format(str(group.name))
-                                        arg += "\n• ʜʀ: {}".format(timeNow.strftime('%A'))
-                                        arg += "\n• ᴊᴍ: {}".format(datetime.strftime(timeNow,'%H:%M:%S'))
-                                        arg += "\n• ᴛɢ: {}".format(datetime.strftime(timeNow,'%d-%m-%Y'))
-                                        arg += "\n• ᴅʀ: {}".format(seconds)
-                                        nimamax.sendMessage(msg.to,arg)
-                        except Exception as error:
-                            print (error)
-                              
-        if op.type == 26:           
-            msg = op.message
-            text = msg.text
-            msg_id = msg.id
-            receiver = msg.to
-            sender = msg._from
-            if msg.toType == 0 or msg.toType == 2:
-               if msg.toType == 0:
-                    to = receiver
-               elif msg.toType == 2:
-                    to = receiver
-               if msg.contentType == 7:
-                 if wait["sticker"] == True:
-                    msg.contentType = 0
-                    nimamax.sendMessage(msg.to,"STKID : " + msg.contentMetadata["STKID"] + "\nSTKPKGID : " + msg.contentMetadata["STKPKGID"] + "\nSTKVER : " + msg.contentMetadata["STKVER"]+ "\n\n「Link Sticker」" + "\nline://shop/detail/" + msg.contentMetadata["STKPKGID"])
-               if msg.contentType == 16:
-                  if msg.toType in (2,1,0):
-                     try:
-                         mat = msg.contentMetadata["postEndUrl"].split('userMid=')[1].split('&postId=')
-                         nimamax.likePost(mat[0], mat[1], 1003)
-                         nimamax.createComment(mat[0], mat[1], "ᴀᴜᴛᴏʟɪᴋᴇ ʙʏ: \n\n\n\n™S̶̭̗̞̙̿͑̽̆̃̒į̷̙̝̦̤̜̗́̉ͅl̸̛͓͋͋͆̍ę̶͇̮̦̣̖̙̘̪̉n̸͍̦͉̖̟͚̗̣̍̓̽̅̚ť̴̙͋ ̷̨̳̠͎̮̘͇̀̅̀͒̈́͊̕͝T̸̡̯̗̩̺͉̑́͛̌̒ͅé̶̡̱̯̮̯̊̏́̀̃͜a̴̭͓̫͚̐́̂̍̂̊̋̚m̸̨̨̹͎͍̳̥͆̓͗̿͐͗͑̿̓͠ ̴̠͐̂B̷̛̳͎̫̻̫̯̣͓̲͋̀͋̋͊̈͗͑o̵̲̾̈́͒͗t̴̢͍̫̰̠̞͖͍̬̑̊̽͒́̈́͗ͅ\n\n\n\nᴄʀᴇᴀᴛᴏʀ:\nhttp://line.me/ti/p/~max_pv\nɢɪᴛhᴜʙ:\ngithub.com/dhenza1415\nchanel ʏᴏᴜᴛᴜʙᴇ:\nhttps://youtu.be/CRqXKcTl6IY\n\nnew ᴄʜᴀɴᴇʟ:\nhttps://youtu.be/6UGH_4gG9qk")
-                     except Exception as e:
-                         nimamax.sendMessage(msg.to, str(e))  
+        
                             
         if op.type == 25 or op.type == 26:
             msg = op.message
