@@ -57,47 +57,12 @@ pip3 install hyper<br>
 pip3 install httplib2<br>
 pip3 install kbbi<br>
 pip3 install humanize<br>
-git clone https://github.com/dhenza1415/SELFBOT2<br>
+git clone https://github.com/nima61/nimamaxbot3<br>
 ls<br>
-cd SELFBOT2<br>
+cd nimamaxbot3<br>
 ls<br>
-python3 selfbotsk2.py<br>
-
-source : linepy by [Visit](https://github.com/reighpuy/NewMedia/
-## Like dan subscribe chanel youtube :( https://youtu.be/CRqXKcTl6IY)<br>
-## [SUBCRABE NOW](https://www.youtube.com/channel/UCNLejYy84XyUX8qcDropXMw)
-KLIK
-## [LINE](http://line.me/ti/p/~teambotprotect)
+python3 nima.py<br>
+## [LINE](http://line.me/ti/p/~max_pv)
 
 
-[ ***Usage Instruction*** ]
-
-> Run the Program :
-```python
-$ git clone https://github.com/dhenza1415/SELFBOT2/
-$ cd SELFBOT2
-$ python -m pip install -r requirements.txt
-$ python3 selfbotsk2.py
-```
-
-# For Checkin Version of Module / Untuk Memeriksa Versi Modul
-
-- Windows :
- > pip freeze | findstr (name)
-
-- Linux :
- > pip freeze | grep (name)
- 
- ## Author bot
-Zero Cool / [@crash-override404](https://github.com/crash-override404)  
-Fadhiil Rachman / [@fadhiilrachman](https://www.instagram.com/fadhiilrachman)  
-Alin / [@muhmursalind](https://github.com/muhmursalind)
-
-## THAKS TO 
- - thaks to [Line](https://line.me/ti/p/~yapuy)
- - thaks to zerro cool (https://github.com/crash-override404/linepy-modified)
- - thaks to Fadhiil Rachman / [@fadhiilrachman](https://www.instagram.com/fadhiilrachman)  
-## NOTE
- - Login fix qr jangan lupa masukan mid di Admin owner dan staff
- - Config default mengunakan header DESKTOPWIN Ubah bagian config.py Jika ingin ubah header
-## © 2020
+ᗰᗩᔑᎢᗴᖇᏆᑎᏀ ᗷᝪᎢ ᑎᏆᗰᗩ ᗰᗩ᙭
